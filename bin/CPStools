@@ -1,0 +1,68 @@
+#!/Users/xuwenbo/anaconda3/bin/python
+import argparse
+import subprocess
+import os
+import sys
+
+
+def run_script(script_name):
+    python_executable = sys.executable
+    script_dir = os.path.dirname(__file__)  # 获取脚本所在目录
+    script_path = os.path.join(script_dir, '..', 'src', script_name)  # 构建脚本的完整路径
+    subprocess.run(['python', script_path])  # 使用 Python 执行脚本
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="""
+        CPStools command line tool
+        Author: Xu Wenbo
+        Org:    China Pharmaceutical University
+        Email:  xwb7533@163.com""",
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    subparsers = parser.add_subparsers(title="sub-commands", help='sub-command help')
+
+    # 添加子命令
+
+    gbcheck_parser = subparsers.add_parser('gbcheck', help='Check annotated file and Compare gene counts and difference in two GenBank files.')
+    gbcheck_parser.set_defaults(func=lambda args: run_script('gbcheck.py'))
+
+    info_parser = subparsers.add_parser('info', help='Statistic gene type and intron numbers from genbank files.')
+    info_parser.set_defaults(func=lambda args: run_script('information.py'))
+
+    Seq_parser = subparsers.add_parser('Seq', help='Adjust the Seq start in chloroplast genomes.')
+    Seq_parser.set_defaults(func=lambda args: run_script('seq_adj.py'))
+
+    ir_parser = subparsers.add_parser('IR', help='Identify four regions in chloroplast genomes.')
+    ir_parser.set_defaults(func=lambda args: run_script('IR.py'))
+
+    pi2_parser = subparsers.add_parser('Pi_2', help='Calculate and sort Pi results as cp genome order.')
+    pi2_parser.set_defaults(func=lambda args: run_script('Pi_2.py'))
+
+    pi1_parser = subparsers.add_parser('Pi_1', help='Extracte Multi-Gene and Multi-Intergenic Sequences .')
+    pi1_parser.set_defaults(func=lambda args: run_script('Pi_1.py'))
+
+    RSCU_parser = subparsers.add_parser('RSCU', help='Get RSCU values from genbank files.')
+    RSCU_parser.set_defaults(func=lambda args: run_script('RSCU.py'))
+
+    SSRs_parser = subparsers.add_parser('SSRs', help='Identify SSRs in chloroplast genomes and mark their types.')
+    SSRs_parser.set_defaults(func=lambda args: run_script('SSRS_annotation.py'))
+
+    converse_parser = subparsers.add_parser('converse', help='Converse genbank format files to fasta/tbl/mVISTA format.')
+    converse_parser.set_defaults(func=lambda args: run_script('converse.py'))
+
+    LSR_parser = subparsers.add_parser('LSRs', help='Annotate LSRs in chloroplast genomes.')
+    LSR_parser.set_defaults(func=lambda args: run_script('LSR_annotation.py'))
+
+    phy_parser = subparsers.add_parser('phy', help='Extract and sort common cds/protein sequences for phylogenetic analysis from multi-gbfiles.')
+    phy_parser.set_defaults(func=lambda args: run_script('phy_built.py'))
+
+    # 为其他脚本重复以上步骤...
+
+    args = parser.parse_args()
+    if hasattr(args, 'func'):
+        args.func(args)
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()
