@@ -60,6 +60,16 @@ python CPStools/bin/CPStools info -i input_file -o aa.txt
 
 ### IR
 
+IR subcommand accepts one parameter:
+
+ -i, --input_file
+
+The parameter of -i/--input_file is required, and the input file can be genbank/fasta format. It will find the four regions in the chloroplast sequences, which the IR region will be identified if length surpass 1,000 bp.
+
+```python
+python CPStools/bin/CPStools IR -i input_file
+```
+
 ### Seq
 
 ### Pi_1
