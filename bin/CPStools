@@ -1,15 +1,14 @@
-#!/Users/xuwenbo/anaconda3/bin/python
 import argparse
 import subprocess
 import os
 import sys
 
 
-def run_script(script_name):
+def run_script(script_name, script_args):
     python_executable = sys.executable
     script_dir = os.path.dirname(__file__)  # 获取脚本所在目录
     script_path = os.path.join(script_dir, '..', 'src', script_name)  # 构建脚本的完整路径
-    subprocess.run(['python', script_path])  # 使用 Python 执行脚本
+    subprocess.run([python_executable, script_path] + script_args) 
 
 def main():
     parser = argparse.ArgumentParser(
@@ -22,41 +21,72 @@ def main():
     subparsers = parser.add_subparsers(title="sub-commands", help='sub-command help')
 
     # 添加子命令
-
     gbcheck_parser = subparsers.add_parser('gbcheck', help='Check annotated file and Compare gene counts and difference in two GenBank files.')
-    gbcheck_parser.set_defaults(func=lambda args: run_script('gbcheck.py'))
+    gbcheck_parser.add_argument('-r', '--ref_file', help='reference GenBank file')
+    gbcheck_parser.add_argument('-i', '--test_file', help='testing GenBank file', required=True)
+    gbcheck_parser.set_defaults(func=lambda args: run_script('gbcheck.py', sys.argv[2:]))
 
     info_parser = subparsers.add_parser('info', help='Statistic gene type and intron numbers from genbank files.')
-    info_parser.set_defaults(func=lambda args: run_script('information.py'))
+    info_parser.add_argument("-i","--input_file", help="Input genbank format file")
+    info_parser.add_argument("-o", "--output_file", help="output file ")
+    info_parser.set_defaults(func=lambda args: run_script('information.py', sys.argv[2:]))
 
     Seq_parser = subparsers.add_parser('Seq', help='Adjust the Seq start in chloroplast genomes.')
-    Seq_parser.set_defaults(func=lambda args: run_script('seq_adj.py'))
+    Seq_parser.add_argument("-i", "--work_dir", help="Input directory of fasta files")
+    Seq_parser.add_argument("-o", "--save_dir", help="Output directory for save files")
+    Seq_parser.add_argument("-f", "--info_file", help="file of the information of the fasta file four regions")
+    Seq_parser.add_argument("-m", "--mode", choices=['SSC', 'LSC', 'RP'],
+        help="Mode: SSC for adjust_SSC_forward, LSC for adjust_start_to_LSC, RP for adjust sequence to reverse_complement")
+    Seq_parser.set_defaults(func=lambda args: run_script('seq_adj.py', sys.argv[2:]))
 
     ir_parser = subparsers.add_parser('IR', help='Identify four regions in chloroplast genomes.')
-    ir_parser.set_defaults(func=lambda args: run_script('IR.py'))
+    ir_parser.add_argument('-i', '--input_file', help='fasta/GenBank format file', required=True)
+    ir_parser.set_defaults(func=lambda args: run_script('IR.py', sys.argv[2:]))
+
+    
+    pi1_parser = subparsers.add_parser('Pi_1', help='Extracte Multi-Gene and Multi-Intergenic Sequences .')
+    pi1_parser.add_argument("-i", "--work_dir", required=True, help="Input directory of genbank files")
+    pi1_parser.set_defaults(func=lambda args: run_script('Pi_1.py', sys.argv[2:]))
 
     pi2_parser = subparsers.add_parser('Pi_2', help='Calculate and sort Pi results as cp genome order.')
-    pi2_parser.set_defaults(func=lambda args: run_script('Pi_2.py'))
+    pi2_parser.add_argument('-i', '--input', type=str, help="Input the directory path of the multi-alignment sequences")
+    pi2_parser.add_argument('-r', '--reference', type=str, help="Input the file path of 'cp_sort_IGS.txt'")
+    pi2_parser.add_argument('-m', '--mode', type=str, choices=['IGS', 'gene'], 
+        help="Mode: IGS for sorting intergenic spaces sequences into cp order;\n"
+        "gene for sorting gene sequences into cp order;\n")
+    pi2_parser.set_defaults(func=lambda args: run_script('Pi_2.py', sys.argv[2:]))
 
-    pi1_parser = subparsers.add_parser('Pi_1', help='Extracte Multi-Gene and Multi-Intergenic Sequences .')
-    pi1_parser.set_defaults(func=lambda args: run_script('Pi_1.py'))
+
 
     RSCU_parser = subparsers.add_parser('RSCU', help='Get RSCU values from genbank files.')
-    RSCU_parser.set_defaults(func=lambda args: run_script('RSCU.py'))
+    RSCU_parser.add_argument("-i", "--work_dir", help="Input directory of genbank files")
+    RSCU_parser.add_argument('-l', '--filter_length', help='CDS filter length, default is 300', type=int)
+    RSCU_parser.set_defaults(func=lambda args: run_script('RSCU.py', sys.argv[2:]))
 
     SSRs_parser = subparsers.add_parser('SSRs', help='Identify SSRs in chloroplast genomes and mark their types.')
-    SSRs_parser.set_defaults(func=lambda args: run_script('SSRS_annotation.py'))
+    SSRs_parser.add_argument('-i', '--input_file', help='GenBank format file', required=True)
+    SSRs_parser.add_argument('-k', '--kmer_length', help='SSRs length, default is 10,6,5,4,4,4')
+    SSRs_parser.set_defaults(func=lambda args: run_script('SSRS_annotation.py', sys.argv[2:]))
 
     converse_parser = subparsers.add_parser('converse', help='Converse genbank format files to fasta/tbl/mVISTA format.')
-    converse_parser.set_defaults(func=lambda args: run_script('converse.py'))
+    converse_parser.add_argument("-i", "--input_dir", help="Input path of genbank file")
+    converse_parser.add_argument("-o", "--output_dir", help="output path of fasta file")
+    converse_parser.add_argument("-m", "--mode", choices=['fasta', 'mVISTA', 'tbl'],
+        help="Mode: fasta for converse genbank format file into fasta format file;\n"
+         "mVISTA for converse genbank format file into mVISTA format file;\n"
+         "tbl for converse genbank format file into tbl format file")
+    converse_parser.set_defaults(func=lambda args: run_script('converse.py', sys.argv[2:]))
 
     LSR_parser = subparsers.add_parser('LSRs', help='Annotate LSRs in chloroplast genomes.')
-    LSR_parser.set_defaults(func=lambda args: run_script('LSR_annotation.py'))
+    LSR_parser.add_argument('-i', '--input_file', help='GenBank format file', required=True)
+    LSR_parser.set_defaults(func=lambda args: run_script('LSR_annotation.py', sys.argv[2:]))
 
     phy_parser = subparsers.add_parser('phy', help='Extract and sort common cds/protein sequences for phylogenetic analysis from multi-gbfiles.')
-    phy_parser.set_defaults(func=lambda args: run_script('phy_built.py'))
-
-    # 为其他脚本重复以上步骤...
+    phy_parser.add_argument("-i", "--ref_file", help="Input the reference  genbank file")
+    phy_parser.add_argument("-o", "--output_dir", help="output directory of fasta files")
+    phy_parser.add_argument("-m", "--mode", choices=['cds', 'pro'],
+        help="Mode: cds for common cds sequences; pro for common protein sequences")
+    phy_parser.set_defaults(func=lambda args: run_script('phy_built.py', sys.argv[2:]))
 
     args = parser.parse_args()
     if hasattr(args, 'func'):
