@@ -53,7 +53,7 @@ def find_repeat_regions(sequences):
         "t": "a",
         "g": "c"
     }
-    sequences = str(Seq(sequences).lower())
+    sequences = str(Seq(str(sequences))).lower()
     rev_seq = str(Seq(sequences).reverse_complement())
     # seed test
     all_list = []
