@@ -58,11 +58,9 @@ This subcommand is used to statistic the gene types and gene numbers
 python CPStools/bin/CPStools info -i input_file -o aa.txt  
 ```
 
-
+### IR
 
 ### Seq
-
-### IR
 
 ### Pi_1
 
