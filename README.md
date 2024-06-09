@@ -94,6 +94,10 @@ The parameter of -m is also required, And three choices was supported:
           LSC foradjust_start_to_LSC, 
           RP for adjust sequence to reverse_complement
 
+```python
+python CPStools/bin/CPStools Seq -i input_dir -o output_dir -f info,txt -m LSC/SSC/RP
+```
+
 ### Pi_1
 
 ### Pi_2
