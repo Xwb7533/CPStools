@@ -72,6 +72,28 @@ python CPStools/bin/CPStools IR -i input_file
 
 ### Seq
 
+The Seq subcommand can be used to adjust the start to the 1st bp in LSC region and the SSC forward. This analysis should combine with the co-linearity.
+
+Seq subcommand accepts four parameter:
+
+ -i, --work_dir
+
+The parameter of -i/--work_dir is required, and the input directory is fasta format of all need adjusted sequences.
+
+ -o, --save_dir
+
+The parameter of -o/--save_dir is required, The directry of adjusted sequences.
+
+-f, --info_file 
+The parameter offile of -f/--info_file is required, This file can be generated from IR subcommand.
+
+-m {SSC,LSC,RP}, --mode {SSC,LSC,RP}
+
+The parameter of -m is also required, And three choices was supported:
+    Mode: SSC for adjust_SSC_forward, 
+          LSC foradjust_start_to_LSC, 
+          RP for adjust sequence to reverse_complement
+
 ### Pi_1
 
 ### Pi_2
