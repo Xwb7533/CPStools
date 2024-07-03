@@ -82,7 +82,6 @@ def find_SSRs(input_file, *length):
     all_matches_sorted = sorted(all_matches, key=lambda x: int(x.split('\t')[2]))
     file_name = os.path.basename(input_file).split('.')[0]
     save_name = file_name + "_SSRs_results.txt"
-    # save_name2 = file_name + "_SSRs_simplification.txt"
     file_save = os.path.join(os.path.dirname(input_file), save_name)
     with open(file_save, 'w') as ff:
         ff.write("type\tlength\tstart\tend\n")
@@ -125,7 +124,6 @@ def IGS_extract(input_file):
         for i in range(len(all_info)-1):
             info_list = all_info[i].split('\t')
             next_list = all_info[i+1].split('\t')
-            #print(info_list, next_list, info_list[0].split('_')[0], next_list[0])
             save_file_w.write(f"{info_list[0]}\t{info_list[1]}\t{info_list[2]}\tGene\n")
             save_file_w.write(f"{info_list[0]}-{next_list[0]}\t{info_list[-2]}\t{next_list[1]}\tIGS\n")
         save_file_w.write(f"{all_info[-1][:-1]}\tGene\n")
@@ -169,38 +167,65 @@ def IGS_extract(input_file):
         file_name = os.path.basename(input_file).split('.')[0]
         save_name = file_name + "_SSRs_results.txt"
         file1 = os.path.join(os.path.dirname(input_file), save_name)
-        st_lines = open(output_, 'r').readlines()[1:]
+        st_lines = open(output_, 'r').readlines()
 
         final_name = file_name + "_SSRs_loc_results.txt"
         final_results = os.path.join(os.path.dirname(input_file), final_name)
         data = []
         st_lines2 = open(file1, 'r').readlines()[1:]
+        
+        unique_data = set()
+        # 处理5列数据的部分
         for line in st_lines:
             parts = line.strip().split('\t')
-            name, start, end, loc = parts[0], int(parts[1]), int(parts[2]), parts[-1]
-            data.append((name, start, end, loc))
+            name = parts[0]
+            start = int(parts[1])
+            end = int(parts[2])
+            loc = parts[-1]
 
+            # 处理额外的范围
+            if len(parts) == 6:
+                extra_start = int(parts[3])
+                extra_end = int(parts[4])
+                unique_data.add((name, start, end, loc))
+                unique_data.add((name, extra_start, extra_end, loc))
+            else:
+                unique_data.add((name, start, end, loc))
+
+        data = list(unique_data)
+        
         printed_combinations = set()
         # write output results
         with open(final_results, 'w') as ff:
             ff.write("type\tlength\tstart\tend\tloc\tloc_type\n")
             for i in st_lines2:
                 st_list = i.split('\t')
+                
+                # Check for extra range in 5-column data
+                if len(st_list) == 5:
+                    extra_range = list(map(int, st_list[4].split()))
+                    st_list = st_list[:4]  # 移除额外的列
+                
                 st_join = '\t'.join(info.strip() for info in st_list)
                 target_list = list(range(int(st_list[2]), int(st_list[3])))
+
+                # Add the extra range to target_list
+                if 'extra_range' in locals():
+                    target_list.extend(range(extra_range[0], extra_range[1]))
+                    del extra_range  # 删除变量避免重复使用
+
                 for num in target_list:
                     for name, start, end, loc in data:
                         if start <= num <= end:
-                            combination = (tuple(target_list), name)
+                            combination = (tuple(target_list), name, loc)
                             if combination not in printed_combinations:
                                 ff.write(f"{st_join}\t{name}\t{loc}\n")
                                 printed_combinations.add(combination)
                             break
-    os.remove(output_)
-    os.remove(save_file)
-    os.remove(file1)
-    print(f"The results was written into:\n\t\t{os.path.abspath(final_results)}\n{'-' * 80}")
-                        
+        os.remove(output_)
+        os.remove(save_file)
+        os.remove(file1)
+        print(f"The results were written into:\n\t\t{os.path.abspath(final_results)}\n{'-' * 80}")
 
 
 def main():
@@ -226,4 +251,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
