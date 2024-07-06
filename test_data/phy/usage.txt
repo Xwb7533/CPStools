@@ -1,0 +1,2 @@
+cpstools phy -d input -m cds
+cpstools phy -d input -m pro
