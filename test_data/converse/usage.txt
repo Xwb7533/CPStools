@@ -1,8 +1,0 @@
-# converse genbank into fasta, the output in the fasta directory
-cpstools converse -d input -m fasta
-
-# converse genbank into tbl, the output in the tbl directory
-cpstools converse -d input -m tbl
-
-# converse genbank into mVISTA, the output in the mVISTA directory
-cpstools converse -d input -m mVISTA
