@@ -1,0 +1,30 @@
+rps16	 seqeunce length samller than 300 bp
+psbK	 seqeunce length samller than 300 bp
+psbI	 seqeunce length samller than 300 bp
+atpH	 seqeunce length samller than 300 bp
+petN	 seqeunce length samller than 300 bp
+petN	 seqeunce not start with ATG
+psbM	 seqeunce length samller than 300 bp
+psbZ	 seqeunce length samller than 300 bp
+psaI	 seqeunce length samller than 300 bp
+psbJ	 seqeunce length samller than 300 bp
+psbL	 seqeunce length samller than 300 bp
+psbF	 seqeunce length samller than 300 bp
+psbE	 seqeunce length samller than 300 bp
+petL	 seqeunce length samller than 300 bp
+petG	 seqeunce length samller than 300 bp
+psaJ	 seqeunce length samller than 300 bp
+rpl33	 seqeunce length samller than 300 bp
+psbT	 seqeunce length samller than 300 bp
+psbT	 seqeunce not start with ATG
+pbf1	 seqeunce length samller than 300 bp
+psbH	 seqeunce length samller than 300 bp
+rpl36	 seqeunce length samller than 300 bp
+rps19	 seqeunce length samller than 300 bp
+rpl23	 seqeunce length samller than 300 bp
+orf70	 seqeunce length samller than 300 bp
+rpl32	 seqeunce length samller than 300 bp
+ndhD	 seqeunce not start with ATG
+psaC	 seqeunce length samller than 300 bp
+ndhE	 seqeunce not start with ATG
+rps15	 seqeunce length samller than 300 bp

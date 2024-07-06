@@ -1,0 +1,8 @@
+Introduction to each file:
+remove_duplicated.fasta:	 Deleted duplicated genes and their sequences.
+filter_sequences.txt:	 Deleted sequences starting with non-ATG and shorter than the specified length.
+after_filter_300.fasta:	 All remaining sequences after filtering.
+save_sequences_name.txt:	 Names and numbers of all remaining genes after filtering.
+merge.fasta:	 Merged sequences of all remaining gene sequences.
+RSCU_results.txt:	 Number of each codon and RSCU values. 
+	Each row has four columns: amino acid, corresponding codon, number of codons, and RSCU value.
