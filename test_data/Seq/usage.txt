@@ -1,0 +1,12 @@
+cd fasta
+for i in ./*.fasta; do cpstools IR -i $i ; done > ../IR.txt
+cd ../
+
+# LSC
+cpstools Seq -d fasta -f IR.txt -m LSC
+
+# SSC
+cpstools Seq -d fasta -f IR.txt -m SSC
+
+# RP
+cpstools Seq -d fasta -f IR.txt -m RP
