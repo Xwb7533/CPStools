@@ -1,0 +1,3 @@
+./5Gynostemma_compressum.gb
+The CDS: ndhD at [118842:120309](-) does not start with 'ATG', please verify!
+----------------------------------------

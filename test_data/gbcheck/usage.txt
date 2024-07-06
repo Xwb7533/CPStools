@@ -1,0 +1,1 @@
+for i in ./*.gb; do cpstools gbcheck -i $i > "$(basename "$i" .gb).txt"; done

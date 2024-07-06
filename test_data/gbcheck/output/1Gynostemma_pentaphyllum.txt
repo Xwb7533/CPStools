@@ -1,0 +1,5 @@
+./1Gynostemma_pentaphyllum.gb
+The CDS: psbL at [66472:66586](-) does not start with 'ATG' and is annotated as RNA editing
+----------------------------------------
+The CDS: ndhD at [118648:120259](-) does not start with 'ATG', please verify!
+----------------------------------------

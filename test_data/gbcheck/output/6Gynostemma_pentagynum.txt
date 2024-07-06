@@ -1,0 +1,3 @@
+./6Gynostemma_pentagynum.gb
+The CDS: ndhD at [118663:120130](-) does not start with 'ATG', please verify!
+----------------------------------------

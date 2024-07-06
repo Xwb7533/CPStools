@@ -1,0 +1,3 @@
+./3Gynostemma_burmanicum.gb
+The CDS: ndhD at [118738:120349](-) does not start with 'ATG', please verify!
+----------------------------------------

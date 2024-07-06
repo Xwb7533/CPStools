@@ -1,0 +1,3 @@
+./2Gynostemma_longipes.gb
+The CDS: ndhD at [118661:120272](-) does not start with 'ATG', please verify!
+----------------------------------------

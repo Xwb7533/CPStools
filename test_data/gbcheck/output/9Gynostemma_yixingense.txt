@@ -1,0 +1,9 @@
+./9Gynostemma_yixingense.gb
+The CDS: petN at [29703:29799](+) does not start with 'ATG', please verify!
+----------------------------------------
+The CDS: psbT at [76689:76806](+) does not start with 'ATG', please verify!
+----------------------------------------
+The CDS: ndhD at [118765:120376](-) does not start with 'ATG', please verify!
+----------------------------------------
+The CDS: ndhE at [120901:121207](-) does not start with 'ATG', please verify!
+----------------------------------------

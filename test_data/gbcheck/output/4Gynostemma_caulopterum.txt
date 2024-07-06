@@ -1,0 +1,3 @@
+./4Gynostemma_caulopterum.gb
+The CDS: ndhD at [118864:120331](-) does not start with 'ATG', please verify!
+----------------------------------------

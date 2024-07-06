@@ -1,0 +1,3 @@
+./8Gynostemma_laxiflorum.gb
+The CDS: ndhD at [119112:120723](-) does not start with 'ATG', please verify!
+----------------------------------------
