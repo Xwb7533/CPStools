@@ -1,0 +1,2 @@
+cd fasta
+for i in ./*.fasta; do cpstools IR -i $i ; done > IR.txt

@@ -1,0 +1,19 @@
+Category	Gene group	Gene name
+Photosynthesis	Subunits of photosystem I	psaB,psaA,psaI,psaJ,psaC
+	Subunits of photosystem II	psbA,psbK,psbI,psbM,psbD,psbC,psbZ,psbJ,psbL,psbF,psbE,psbB,psbT,psbH
+	Subunits of NADH dehydrogenase	ndhJ,ndhK,ndhC,ndhB(2),ndhF,ndhD,ndhE,ndhG,ndhI,ndhA,ndhH
+	Subunits of cytochrome b/f complex	petN,petA,petL,petG,petB,petD
+	Subunits of ATP synthase	atpA,atpF,atpH,atpI,atpE,atpB
+	Large subunit of rubisco	rbcL
+Self-replication	Proteins of large ribosomal subunit	rpl33,rpl20,rpl36,rpl14,rpl16,rpl22,rpl2(2),rpl23(2),rpl32
+	Proteins of small ribosomal subunit	rps12(2),rps16,rps2,rps14,rps4,rps18,rps11,rps8,rps3,rps19,rps7(2),rps15
+	Subunits of RNA polymerase	rpoC2,rpoC1,rpoB,rpoA
+	Ribosomal RNAs	rrn16(2),rrn23(2),rrn4.5(2),rrn5(2)
+	Transfer RNAs	trnH-GUG,trnk-UUU,trnQ-UUG,trnS-GCU,trnG-UCC,trnR-UCU,trnC-GCA,trnD-GUC,trnY-GUA,trnE-UUC,trnT-GGU,trnS-UGA,trnG-GCC,trnM-CAU(2),trnS-GGA,trnT-UGU,trnL-UAA,trnF-GAA,trnV-UAC,trnW-CCA,trnP-UGG,trnI-CAU(2),trnL-CAA(2),trnV-GAC(2),trnI-GAU(2),trnA-UGC(2),trnR-ACG(2),trnN-GUU(2),trnL-UAG
+Other genes	Maturase	matK
+	Protease	clpP
+	Envelope membrane protein	cemA
+	Acetyl-CoA carboxylase	accD
+	c-type cytochrome synthesis gene	ccsA
+	Translation initiation factor	infA
+	other	pbf1

@@ -1,0 +1,2 @@
+cd input
+for i in ./*.gb; do cpstools info -i $i;  done
